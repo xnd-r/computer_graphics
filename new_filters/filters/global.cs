@@ -175,6 +175,15 @@ namespace filters
         }
     }
 
+    class shift : Filters
+    {
+        protected override Color calculateNewPixelColor(Bitmap src_img, int x, int y)
+        {
+            return src_img.GetPixel(
+                clamp((int)(x + 50), 0, src_img.Width - 1), y);
+        }
+    }
+
     class horiz_waves : Filters
     {
         protected override Color calculateNewPixelColor(Bitmap src_img, int x, int y)
@@ -204,6 +213,7 @@ namespace filters
                 clamp((int)(y + (rand.Next(1) - 0.5) * 10), 0, src_img.Height - 1));
         }
     }
+
     class gray_world : Filters
     {
         float avg_r = 0f, avg_g = 0f, avg_b =  0f;
@@ -256,6 +266,32 @@ namespace filters
             Array.Sort(tmp_g);
             Array.Sort(tmp_b);
             return Color.FromArgb(tmp_r[size / 2], tmp_g[size / 2], tmp_b[size / 2]);
+        }
+    }
+
+    class lin_elongation : Filters
+    {
+        int r_max = 0, r_min = 0, g_max = 0, g_min = 0, b_max = 0, b_min = 0;
+        public lin_elongation(Bitmap scr_img)
+        {
+            for (int i = 0; i < scr_img.Width; ++i)
+                for (int j = 0; j < scr_img.Height; ++j)
+                {
+                    r_max = Math.Max(r_max, scr_img.GetPixel(i, j).R);
+                    g_max = Math.Max(g_max, scr_img.GetPixel(i, j).G);
+                    b_max = Math.Max(b_max, scr_img.GetPixel(i, j).B);
+                    r_min = Math.Min(r_min, scr_img.GetPixel(i, j).R);
+                    g_min = Math.Min(g_min, scr_img.GetPixel(i, j).G);
+                    b_min = Math.Min(b_min, scr_img.GetPixel(i, j).B);
+                }
+        }
+        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        {
+            Color src = sourceImage.GetPixel(x, y);
+            return Color.FromArgb(
+                clamp((src.R - r_min) * 255 / (r_max - r_min), 0, 255),
+                clamp((src.G - g_min) * 255 / (g_max - g_min), 0, 255),
+                clamp((src.B - b_min) * 255 / (b_max - b_min), 0, 255));
         }
     }
 

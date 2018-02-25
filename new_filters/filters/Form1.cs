@@ -162,5 +162,18 @@ namespace filters
             Filters filter = new median();
             backgroundWorker1.RunWorkerAsync(filter);
         }
+
+        private void shiftToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new shift();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void elongationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new lin_elongation(image);
+            backgroundWorker1.RunWorkerAsync(filter);
+
+        }
     }
 }

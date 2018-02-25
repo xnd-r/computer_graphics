@@ -54,12 +54,17 @@
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.digitalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.medianToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.shiftToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.elongationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Location = new System.Drawing.Point(82, 25);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
@@ -123,7 +128,8 @@
             this.blackWhiteToolStripMenuItem,
             this.sepiaToolStripMenuItem,
             this.brightnessToolStripMenuItem,
-            this.grayWorldToolStripMenuItem});
+            this.grayWorldToolStripMenuItem,
+            this.elongationToolStripMenuItem});
             this.dottedToolStripMenuItem.Name = "dottedToolStripMenuItem";
             this.dottedToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.dottedToolStripMenuItem.Text = "Dotted";
@@ -208,7 +214,8 @@
             this.indexToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.horisonttalWavesToolStripMenuItem,
             this.verticalWavesToolStripMenuItem,
-            this.glassToolStripMenuItem});
+            this.glassToolStripMenuItem,
+            this.shiftToolStripMenuItem});
             this.indexToolStripMenuItem.Name = "indexToolStripMenuItem";
             this.indexToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.indexToolStripMenuItem.Text = "Index";
@@ -236,6 +243,8 @@
             // 
             // progressBar1
             // 
+            this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar1.Location = new System.Drawing.Point(82, 436);
             this.progressBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.progressBar1.Name = "progressBar1";
@@ -244,6 +253,7 @@
             // 
             // button1
             // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Location = new System.Drawing.Point(734, 436);
             this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
@@ -276,6 +286,20 @@
             this.medianToolStripMenuItem1.Text = "Median";
             this.medianToolStripMenuItem1.Click += new System.EventHandler(this.medianToolStripMenuItem1_Click);
             // 
+            // shiftToolStripMenuItem
+            // 
+            this.shiftToolStripMenuItem.Name = "shiftToolStripMenuItem";
+            this.shiftToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.shiftToolStripMenuItem.Text = "Shift";
+            this.shiftToolStripMenuItem.Click += new System.EventHandler(this.shiftToolStripMenuItem_Click);
+            // 
+            // elongationToolStripMenuItem
+            // 
+            this.elongationToolStripMenuItem.Name = "elongationToolStripMenuItem";
+            this.elongationToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.elongationToolStripMenuItem.Text = " Elongation";
+            this.elongationToolStripMenuItem.Click += new System.EventHandler(this.elongationToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -288,7 +312,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Filters_lab";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -325,6 +349,8 @@
         private System.Windows.Forms.ToolStripMenuItem grayWorldToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem digitalToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem medianToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem shiftToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem elongationToolStripMenuItem;
     }
 }
 
