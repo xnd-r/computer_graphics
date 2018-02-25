@@ -180,7 +180,7 @@ namespace filters
         protected override Color calculateNewPixelColor(Bitmap src_img, int x, int y)
         {
             return src_img.GetPixel(
-                x, clamp((int)(y + 20 * Math.Sin(2 * Math.PI * y / 30)), 0, src_img.Width - 1));
+                x, clamp((int)(y + 20 * Math.Sin(2 * Math.PI * y / 30)), 0, src_img.Height - 1));
         }
     }
 
@@ -193,4 +193,19 @@ namespace filters
         }
 
     }
+
+    class glass : Filters
+    {
+        protected override Color calculateNewPixelColor(Bitmap src_img, int x, int y)
+        {
+            Random rand = new Random();
+            return src_img.GetPixel(
+                clamp((int)(x + (rand.Next(1) - 0.5) * 10), 0, src_img.Width - 1), 
+                clamp((int)(y + (rand.Next(1) - 0.5) * 10), 0, src_img.Height - 1));
+        }
+       
+    }
+
+
+
 }

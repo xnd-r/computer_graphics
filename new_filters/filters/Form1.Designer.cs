@@ -50,6 +50,7 @@
             this.sepiaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.brightnessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sharpnessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.glassToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -96,6 +97,7 @@
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // filtersToolStripMenuItem
             // 
@@ -166,7 +168,8 @@
             // 
             this.indexToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.horisonttalWavesToolStripMenuItem,
-            this.verticalWavesToolStripMenuItem});
+            this.verticalWavesToolStripMenuItem,
+            this.glassToolStripMenuItem});
             this.indexToolStripMenuItem.Name = "indexToolStripMenuItem";
             this.indexToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.indexToolStripMenuItem.Text = "Index";
@@ -234,6 +237,13 @@
             this.sharpnessToolStripMenuItem.Text = "Sharpness";
             this.sharpnessToolStripMenuItem.Click += new System.EventHandler(this.sharpnessToolStripMenuItem_Click);
             // 
+            // glassToolStripMenuItem
+            // 
+            this.glassToolStripMenuItem.Name = "glassToolStripMenuItem";
+            this.glassToolStripMenuItem.Size = new System.Drawing.Size(202, 26);
+            this.glassToolStripMenuItem.Text = "Glass";
+            this.glassToolStripMenuItem.Click += new System.EventHandler(this.glassToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -278,6 +288,7 @@
         private System.Windows.Forms.ToolStripMenuItem horisonttalWavesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem verticalWavesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sharpnessToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem glassToolStripMenuItem;
     }
 }
 
