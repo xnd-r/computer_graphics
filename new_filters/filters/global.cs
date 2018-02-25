@@ -203,7 +203,60 @@ namespace filters
                 clamp((int)(x + (rand.Next(1) - 0.5) * 10), 0, src_img.Width - 1), 
                 clamp((int)(y + (rand.Next(1) - 0.5) * 10), 0, src_img.Height - 1));
         }
-       
+    }
+    class gray_world : Filters
+    {
+        float avg_r = 0f, avg_g = 0f, avg_b =  0f;
+
+        public gray_world(Bitmap src_img)
+        { 
+            for (int i = 0; i < src_img.Width; ++i)
+                for (int j = 0; j < src_img.Height; ++j)
+                {
+                    avg_r += src_img.GetPixel(i, j).R;
+                    avg_g += src_img.GetPixel(i, j).G;
+                    avg_b += src_img.GetPixel(i, j).B;
+                }
+            int tmp_2 = src_img.Width * src_img.Height;
+            avg_r /= tmp_2;
+            avg_g /= tmp_2;
+            avg_b /= tmp_2;
+        }
+        protected override Color calculateNewPixelColor(Bitmap src_img, int x, int y)
+        {
+            float average = (avg_r + avg_g + avg_r) / 3;
+            Color scr = src_img.GetPixel(x, y);
+            return Color.FromArgb(
+                clamp((int)(scr.R * average / avg_r), 0, 255), 
+                clamp((int)(scr.G * average / avg_g), 0, 255), 
+                clamp((int)(scr.B * average / avg_b), 0, 255));
+        }
+    }
+
+    class median : Filters
+    {
+        protected override Color calculateNewPixelColor(Bitmap src_img, int x, int y)
+        {
+            int range = 3;
+            int size = (2 * range + 1) * (2 * range + 1);
+            int[] tmp_r = new int[size], tmp_g = new int[size], tmp_b = new int[size];
+            
+            for (int i = 0, l = -range; l <= range; ++l)
+                for (int k = -range; k <= range; ++k)
+                {
+                    int id_x = clamp(x + k, 0, src_img.Width - 1);
+                    int id_y = clamp(y + l, 0, src_img.Height - 1);
+                    Color neighbor_color = src_img.GetPixel(id_x, id_y);
+                    tmp_r[i] = neighbor_color.R;
+                    tmp_g[i] = neighbor_color.G;
+                    tmp_b[i] = neighbor_color.B;
+                    i++;
+                }
+            Array.Sort(tmp_r);
+            Array.Sort(tmp_g);
+            Array.Sort(tmp_b);
+            return Color.FromArgb(tmp_r[size / 2], tmp_g[size / 2], tmp_b[size / 2]);
+        }
     }
 
 

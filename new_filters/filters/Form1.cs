@@ -131,32 +131,36 @@ namespace filters
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // assigned to Button2.     
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "JPeg Image|*.jpg|Bitmap Image|*.bmp|Gif Image|*.png";
-            saveFileDialog1.Title = "Save an Image File";
-            saveFileDialog1.ShowDialog();
-             
-            if (saveFileDialog1.FileName != "")
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "JPeg Image| *.jpg | Bitmap Image | *.bmp | Portable network graphics| *.png | All files (*.*) | *.*";
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
-                System.IO.FileStream fs =
-                   (System.IO.FileStream)saveFileDialog1.OpenFile();
-                switch (saveFileDialog1.FilterIndex)
-                {
-                    case 1:
-                        this.saveToolStripMenuItem.Image.Save(fs, System.Drawing.Imaging.ImageFormat.Jpeg);
-                        break;
-
-                    case 2:
-                        this.saveToolStripMenuItem.Image.Save(fs, System.Drawing.Imaging.ImageFormat.Bmp);
-                        break;
-
-                    case 3:
-                        this.saveToolStripMenuItem.Image.Save(fs, System.Drawing.Imaging.ImageFormat.Bmp);
-                        break;
-                }
-                fs.Close();
+                image.Save(dialog.FileName);
             }
+
+        }
+
+        private void grayWorldToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new gray_world(image);
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void filtersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void medianToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new median();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void medianToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Filters filter = new median();
+            backgroundWorker1.RunWorkerAsync(filter);
         }
     }
 }
