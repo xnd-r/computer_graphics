@@ -205,12 +205,12 @@ namespace filters
 
     class glass : Filters
     {
+        Random rand = new Random();
         protected override Color calculateNewPixelColor(Bitmap src_img, int x, int y)
         {
-            Random rand = new Random();
             return src_img.GetPixel(
-                clamp((int)(x + (rand.Next(1) - 0.5) * 10), 0, src_img.Width - 1), 
-                clamp((int)(y + (rand.Next(1) - 0.5) * 10), 0, src_img.Height - 1));
+                clamp((int)(x + (rand.NextDouble() - 0.5) * 10), 0, src_img.Width - 1), 
+                clamp((int)(y + (rand.NextDouble() - 0.5) * 10), 0, src_img.Height - 1));
         }
     }
 
@@ -294,7 +294,4 @@ namespace filters
                 clamp((src.B - b_min) * 255 / (b_max - b_min), 0, 255));
         }
     }
-
-
-
 }

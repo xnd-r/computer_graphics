@@ -175,5 +175,40 @@ namespace filters
             backgroundWorker1.RunWorkerAsync(filter);
 
         }
+
+        private void dilationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new dilation();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void erosiomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new erosion();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void openingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new opening();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void closingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new closing();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void topHatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Filters filter = new top_hat();
+            backgroundWorker1.RunWorkerAsync(filter);
+        }
     }
 }
