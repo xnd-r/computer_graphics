@@ -316,7 +316,7 @@
             this.erosiomToolStripMenuItem.Name = "erosiomToolStripMenuItem";
             this.erosiomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.erosiomToolStripMenuItem.Text = "Erosion";
-            this.erosiomToolStripMenuItem.Click += new System.EventHandler(this.erosiomToolStripMenuItem_Click);
+            this.erosiomToolStripMenuItem.Click += new System.EventHandler(this.erosionToolStripMenuItem_Click);
             // 
             // progressBar1
             // 

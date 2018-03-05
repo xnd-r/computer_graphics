@@ -182,7 +182,7 @@ namespace filters
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
-        private void erosiomToolStripMenuItem_Click(object sender, EventArgs e)
+        private void erosionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters filter = new erosion();
             backgroundWorker1.RunWorkerAsync(filter);
@@ -202,7 +202,6 @@ namespace filters
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void topHatToolStripMenuItem_Click(object sender, EventArgs e)
