@@ -29,15 +29,14 @@ namespace Tomogram
             GL.Viewport(0, 0, width, height);
         }
 
-        Color TransferFunction(short value)
+        Color TransferFunction(short value, int min, int _TF)
         {
-            int min = 0;
-            int max = 100;
+            int max = min + _TF;
             int newVal = Clamp((value - min) * 255 / (max - min), 0, 255);
             return Color.FromArgb(255, newVal, newVal, newVal);
         }
 
-        public void DrawQuads(int layerNumber)
+        public void DrawQuads(int layerNumber, int min, int TF)
         {
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
             GL.Begin(BeginMode.Quads);
@@ -45,21 +44,21 @@ namespace Tomogram
                 for (int y_coord = 0; y_coord < Bin.Y - 1; y_coord++)
                 {
                     short value;
-                    //1st versh
+                    //1st vertex
                     value = Bin.array[x_coord + y_coord * Bin.X + layerNumber * Bin.X * Bin.Y];
-                    GL.Color3(TransferFunction(value));
+                    GL.Color3(TransferFunction(value, min, TF));
                     GL.Vertex2(x_coord, y_coord);
-                    //2nd versh
+                    //2nd vertex
                     value = Bin.array[x_coord + (y_coord + 1) * Bin.X + layerNumber * Bin.X * Bin.Y];
-                    GL.Color3(TransferFunction(value));
+                    GL.Color3(TransferFunction(value, min, TF));
                     GL.Vertex2(x_coord, y_coord + 1);
-                    //3rd versh
+                    //3rd vertex
                     value = Bin.array[x_coord + 1 + (y_coord + 1) * Bin.X + layerNumber * Bin.X * Bin.Y];
-                    GL.Color3(TransferFunction(value));
+                    GL.Color3(TransferFunction(value, min, TF));
                     GL.Vertex2(x_coord + 1, y_coord + 1);
-                    //4th versh
+                    //4th vertex
                     value = Bin.array[x_coord + 1 + y_coord * Bin.X + layerNumber * Bin.X * Bin.Y];
-                    GL.Color3(TransferFunction(value));
+                    GL.Color3(TransferFunction(value, min, TF));
                     GL.Vertex2(x_coord + 1, y_coord);
                 }
             GL.End();
@@ -88,14 +87,14 @@ namespace Tomogram
             string str = Er.ToString();
         }
 
-        public void generateTextureImage(int layerNumber)
+        public void generateTextureImage(int layerNumber, int min, int TF)
         {
             textureImage = new Bitmap(Bin.X, Bin.Y);
             for (int i = 0; i < Bin.X; ++i)
                 for (int j = 0; j < Bin.Y; ++j)
                 {
                     int pixelNumber = i + j * Bin.X + layerNumber * Bin.X * Bin.Y;
-                    textureImage.SetPixel(i, j, TransferFunction(Bin.array[pixelNumber]));
+                    textureImage.SetPixel(i, j, TransferFunction((Bin.array[pixelNumber]), min, TF));
                 }
         }
 

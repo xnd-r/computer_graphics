@@ -36,6 +36,9 @@
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.trackBar2 = new System.Windows.Forms.TrackBar();
             this.trackBar3 = new System.Windows.Forms.TrackBar();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar3)).BeginInit();
@@ -57,7 +60,7 @@
             // 
             // button1
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.button1.Location = new System.Drawing.Point(26, 735);
             this.button1.Name = "button1";
@@ -70,15 +73,15 @@
             // trackBar1
             // 
             this.trackBar1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.trackBar1.Location = new System.Drawing.Point(13, 614);
-            this.trackBar1.Maximum = 20;
+            this.trackBar1.Location = new System.Drawing.Point(156, 614);
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(1475, 56);
+            this.trackBar1.Size = new System.Drawing.Size(1332, 56);
             this.trackBar1.TabIndex = 2;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // radioButton1
             // 
+            this.radioButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButton1.AutoSize = true;
             this.radioButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.radioButton1.Location = new System.Drawing.Point(187, 738);
@@ -92,6 +95,7 @@
             // 
             // radioButton2
             // 
+            this.radioButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButton2.AutoSize = true;
             this.radioButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.radioButton2.Location = new System.Drawing.Point(347, 738);
@@ -104,6 +108,7 @@
             // 
             // radioButton3
             // 
+            this.radioButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButton3.AutoSize = true;
             this.radioButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.radioButton3.Location = new System.Drawing.Point(484, 738);
@@ -117,27 +122,65 @@
             // trackBar2
             // 
             this.trackBar2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.trackBar2.Location = new System.Drawing.Point(15, 642);
-            this.trackBar2.Maximum = 20;
+            this.trackBar2.Location = new System.Drawing.Point(156, 642);
+            this.trackBar2.Maximum = 100;
             this.trackBar2.Name = "trackBar2";
-            this.trackBar2.Size = new System.Drawing.Size(1475, 56);
+            this.trackBar2.Size = new System.Drawing.Size(1334, 56);
             this.trackBar2.TabIndex = 6;
+            this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
             // 
             // trackBar3
             // 
             this.trackBar3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.trackBar3.Location = new System.Drawing.Point(15, 673);
-            this.trackBar3.Maximum = 20;
+            this.trackBar3.Location = new System.Drawing.Point(156, 673);
+            this.trackBar3.Maximum = 100;
             this.trackBar3.Name = "trackBar3";
-            this.trackBar3.Size = new System.Drawing.Size(1475, 56);
+            this.trackBar3.Size = new System.Drawing.Size(1334, 56);
             this.trackBar3.TabIndex = 7;
             this.trackBar3.Scroll += new System.EventHandler(this.trackBar3_Scroll);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label1.Location = new System.Drawing.Point(21, 614);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(129, 25);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Сurrent Layer";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label2.Location = new System.Drawing.Point(54, 645);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(96, 25);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Min value";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label3.Location = new System.Drawing.Point(61, 673);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(89, 25);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "TF value";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1502, 804);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.trackBar3);
             this.Controls.Add(this.trackBar2);
             this.Controls.Add(this.radioButton3);
@@ -147,7 +190,7 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.glControl1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Tomogram Visualizer";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).EndInit();
@@ -167,6 +210,9 @@
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.TrackBar trackBar2;
         private System.Windows.Forms.TrackBar trackBar3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
 

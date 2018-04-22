@@ -16,8 +16,8 @@ namespace Tomogram
         {
             InitializeComponent();
         }
-        int min_value = 0;
-        int TF_value = 1;
+        int min = 0;
+        int TF = 1;
         Bin bin = new Bin();
         int currentLayer;
         View view = new View();
@@ -56,7 +56,7 @@ namespace Tomogram
             {
                 if (radioButton1.Checked)
                 {
-                    view.DrawQuads(currentLayer);
+                    view.DrawQuads(currentLayer, min, TF);
                     glControl1.SwapBuffers();
                 }
 
@@ -64,20 +64,15 @@ namespace Tomogram
                 {
                     if (needReload)
                     {
-                        view.generateTextureImage(currentLayer);
+                        view.generateTextureImage(currentLayer, min, TF);
                         view.Load2DTexture();
                         needReload = false;
                     }
                     view.DrawTexture();
                     glControl1.SwapBuffers();
                 }
-                //    if (radioButton3.Checked)
-                //    {
-                //        view.DrawBonusSquad(currentLayer, min_value, TF_value);
-                //        glControl1.SwapBuffers();
-                //    }
-                }
             }
+        }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
@@ -111,6 +106,18 @@ namespace Tomogram
         }
 
         private void trackBar3_Scroll(object sender, EventArgs e)
+        {
+            TF = trackBar3.Value;
+            needReload = true;
+        }
+
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+            min = trackBar2.Value;
+            needReload = true;
+        }
+
+        private void label3_Click(object sender, EventArgs e)
         {
 
         }
