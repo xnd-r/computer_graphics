@@ -13,7 +13,8 @@ namespace filters
     public partial class Form1 : Form
     {
         Bitmap image;
- 
+        Stack<Bitmap> BackUp = new Stack<Bitmap>();
+
         public Form1()
         {
             InitializeComponent();
@@ -32,6 +33,7 @@ namespace filters
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            BackUp.Clear();
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Image files | *.png; *.jpg; *.bmp | All Files (*.*) | *.*";
             if (dialog.ShowDialog() == DialogResult.OK)
@@ -46,7 +48,10 @@ namespace filters
         {
             Bitmap new_img = ((Filters)e.Argument).processImage(image, backgroundWorker1);
             if (backgroundWorker1.CancellationPending != true)
+            {
+                BackUp.Push(image);
                 image = new_img;
+            }
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -182,7 +187,7 @@ namespace filters
             backgroundWorker1.RunWorkerAsync(filter);
         }
 
-        private void erosiomToolStripMenuItem_Click(object sender, EventArgs e)
+        private void erosionToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters filter = new erosion();
             backgroundWorker1.RunWorkerAsync(filter);
@@ -202,13 +207,25 @@ namespace filters
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void topHatToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Filters filter = new top_hat();
             backgroundWorker1.RunWorkerAsync(filter);
+        }
+
+        private void backupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (BackUp.Count > 0) backupToolStripMenuItem.Enabled = true;
+            else backupToolStripMenuItem.Enabled = false;
+        }
+
+        private void backupToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            image = BackUp.Pop();
+            pictureBox1.Image = image;
+            pictureBox1.Refresh();
         }
     }
 }

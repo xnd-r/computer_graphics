@@ -58,10 +58,12 @@
             this.closingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dilationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.erosiomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.topHatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.button1 = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.topHatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backupToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -85,7 +87,8 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.filtersToolStripMenuItem});
+            this.filtersToolStripMenuItem,
+            this.backupToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
@@ -316,7 +319,14 @@
             this.erosiomToolStripMenuItem.Name = "erosiomToolStripMenuItem";
             this.erosiomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.erosiomToolStripMenuItem.Text = "Erosion";
-            this.erosiomToolStripMenuItem.Click += new System.EventHandler(this.erosiomToolStripMenuItem_Click);
+            this.erosiomToolStripMenuItem.Click += new System.EventHandler(this.erosionToolStripMenuItem_Click);
+            // 
+            // topHatToolStripMenuItem
+            // 
+            this.topHatToolStripMenuItem.Name = "topHatToolStripMenuItem";
+            this.topHatToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.topHatToolStripMenuItem.Text = "Top hat";
+            this.topHatToolStripMenuItem.Click += new System.EventHandler(this.topHatToolStripMenuItem_Click);
             // 
             // progressBar1
             // 
@@ -348,12 +358,21 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // topHatToolStripMenuItem
+            // backupToolStripMenuItem
             // 
-            this.topHatToolStripMenuItem.Name = "topHatToolStripMenuItem";
-            this.topHatToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.topHatToolStripMenuItem.Text = "Top hat";
-            this.topHatToolStripMenuItem.Click += new System.EventHandler(this.topHatToolStripMenuItem_Click);
+            this.backupToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.backupToolStripMenuItem1});
+            this.backupToolStripMenuItem.Name = "backupToolStripMenuItem";
+            this.backupToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.backupToolStripMenuItem.Text = "Back_up";
+            this.backupToolStripMenuItem.Click += new System.EventHandler(this.backupToolStripMenuItem_Click);
+            // 
+            // backupToolStripMenuItem1
+            // 
+            this.backupToolStripMenuItem1.Name = "backupToolStripMenuItem1";
+            this.backupToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.backupToolStripMenuItem1.Text = "back_up";
+            this.backupToolStripMenuItem1.Click += new System.EventHandler(this.backupToolStripMenuItem1_Click);
             // 
             // Form1
             // 
@@ -412,6 +431,8 @@
         private System.Windows.Forms.ToolStripMenuItem dilationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem erosiomToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem topHatToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem backupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem backupToolStripMenuItem1;
     }
 }
 

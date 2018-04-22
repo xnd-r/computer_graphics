@@ -22,7 +22,7 @@ namespace filters
     }
     class dilation : morfology
     {
-        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        protected Color Dil(Bitmap sourceImage, int x, int y)
         {
             int radiusX = kernel.GetLength(0) / 2;
             int radiusY = kernel.GetLength(1) / 2;
@@ -39,7 +39,7 @@ namespace filters
                     int intensity = color.R;
                     if ((color.R != color.G) || (color.R != color.B) || (color.G != color.B))
                     {
-                        intensity = (int)(0.36 * color.R + 0.53 * color.G + 0.11 * color.R);
+                        intensity = (int)(0.36 * color.R + 0.53 * color.G + 0.11 * color.B);
                     }
                     if (kernel[k + radiusX, l + radiusY] > 0 && intensity > max)
                     {
@@ -52,26 +52,26 @@ namespace filters
     }
     class erosion : morfology
     {
-        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
+        protected override Color calculateNewPixelColor(Bitmap src_img, int x, int y)
         {
-            int radiusX = kernel.GetLength(0) / 2;
-            int radiusY = kernel.GetLength(1) / 2;
+            int range_x = kernel.GetLength(0) / 2;
+            int range_y = kernel.GetLength(1) / 2;
 
-            Color resultColor = Color.Black;
+            Color resultColor = Color.White;
 
             byte min = 255;
-            for (int l = -radiusY; l <= radiusY; l++)
-                for (int k = -radiusX; k <= radiusX; k++)
+            for (int l = -range_y; l <= range_y; l++)
+                for (int k = -range_x; k <= range_x; k++)
                 {
-                    int idX = clamp(x + k, 0, sourceImage.Width - 1);
-                    int idY = clamp(y + l, 0, sourceImage.Height - 1);
-                    Color color = sourceImage.GetPixel(idX, idY);
+                    int id_x = clamp(x + k, 0, src_img.Width - 1);
+                    int id_y = clamp(y + l, 0, src_img.Height - 1);
+                    Color color = src_img.GetPixel(id_x, id_y);
                     int intensity = color.R;
                     if ((color.R != color.G) || (color.R != color.B) || (color.G != color.B))
                     {
-                        intensity = (int)(0.36 * color.R + 0.53 * color.G + 0.11 * color.R);
+                        intensity = (int)(0.36 * color.R + 0.53 * color.G + 0.11 * color.B);
                     }
-                    if (kernel[k + radiusX, l + radiusY] > 0 && intensity < min)
+                    if (kernel[k + range_x, l + range_y] > 0 && intensity < min)
                     {
                         min = (byte)intensity;
                         resultColor = color;
@@ -83,76 +83,74 @@ namespace filters
 
     class opening : morfology
     {
-        public new Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
         {
             dilation dilat;
             erosion eros;
 
-                dilat = new dilation();
-                eros = new erosion();
+            dilat = new dilation();
+            eros = new erosion();
             return dilat.processImage(eros.processImage(sourceImage, worker), worker);
         }
     }
 
     class closing : morfology
     {
-        public new Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
         {
             dilation dilat;
             erosion eros;
-            //if (kernel == null)
-            //{
             dilat = new dilation();
             eros = new erosion();
-            //}
-            //else
-            //{
-            //    dilat = new dilation(kernel);
-            //    eros = new erosion(kernel);
-            //}
+
             return eros.processImage(dilat.processImage(sourceImage, worker), worker);
         }
     }
-    class Subtract : Filters
-    {
-        Bitmap MinuendImage = null;
-        public Subtract(Bitmap minuendImage)
-        {
-            MinuendImage = minuendImage;
-        }
-        protected override Color calculateNewPixelColor(Bitmap sourceImage, int x, int y)
-        {
-            Color MinuendColor = MinuendImage.GetPixel(x, y);
-            Color SubtractColor = sourceImage.GetPixel(x, y);
-            return Color.FromArgb(clamp(MinuendColor.R - SubtractColor.R, 0, 255),
-                                  clamp(MinuendColor.G - SubtractColor.G, 0, 255),
-                                  clamp(MinuendColor.B - SubtractColor.B, 0, 255));
-        }
-    }
 
-    class top_hat : morfology
+    class top_hat : opening
     {
         public top_hat()
         {
-            kernel = null;
+            //kernel = null;
+            
         }
-         public top_hat(float[,] kernel)
+
+        protected Color calculateNewPixelColor(Bitmap src, Bitmap edited, int x, int y)
         {
-            this.kernel = kernel;
+            Color minuend_color = src.GetPixel(x, y);
+            Color substract_color = edited.GetPixel(x, y);
+            return Color.FromArgb(
+                clamp(minuend_color.R - substract_color.R, 0, 255),
+                clamp(minuend_color.G - substract_color.G, 0, 255),
+                clamp(minuend_color.B - substract_color.B, 0, 255));
         }
-        public new Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
+
+        Bitmap substraction(Bitmap src, Bitmap editedImage, BackgroundWorker worker)
         {
-            closing close;
-            //if (this.kernel == null)
-            //{
-                close = new closing();
-            //}
-            //else
-            //{
-            //    close = new closing(kernel);
-            //}
-            Subtract subtraction = new Subtract(sourceImage);
-            return subtraction.processImage(close.processImage(sourceImage, worker), worker);
+            Bitmap res = new Bitmap(src.Width, src.Height);
+            for (int i = 0; i < src.Width; i++)
+            {
+                worker.ReportProgress((int)((float)i / res.Width * 100));
+                if (worker.CancellationPending)
+                    return null;
+
+                for (int j = 0; j < src.Height; j++)
+                {
+                    res.SetPixel(i, j, calculateNewPixelColor(src, editedImage, i, j));
+                }
+            }
+            return res;
+        }
+
+        public override Bitmap processImage(Bitmap sourceImage, BackgroundWorker worker)
+        {
+            Bitmap new_src = sourceImage;
+            //dilation dilat;
+            //erosion eros;
+            //dilat = new dilation();
+            //eros = new erosion();
+            opening open = new opening();
+            return substraction(new_src, open.processImage(sourceImage, worker), worker);
         }
     }
   }

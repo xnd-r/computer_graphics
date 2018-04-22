@@ -14,7 +14,7 @@ namespace filters
     {
         protected abstract Color calculateNewPixelColor(Bitmap src, int x, int y);
 
-        public Bitmap processImage(Bitmap src, BackgroundWorker worker)
+        public virtual Bitmap processImage(Bitmap src, BackgroundWorker worker)
         {
             Bitmap res = new Bitmap(src.Width, src.Height);
             for (int i = 0; i < src.Width; i++)
